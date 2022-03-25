@@ -1,56 +1,76 @@
-require('colors');
+const inquirer = require('inquirer');
+const colors = require('colors');
 
-const mainMenu = () => {
+const preguntas = [
+    {
+        type: 'list',
+        name: 'option',
+        message: '¿Qué desea hacer?',
+        choices: [
+            {
+                value: '1',
+                name: '1. Crear Tarea'
+            },
+            {
+                value: '2',
+                name: '2. Listar Tareas'
+            },
+            {
+                value: '3',
+                name: '3. Listar Tareas Completadas'
+            },
+            {
+                value: '4',
+                name: '4. Listar Tareas Pendientes'
+            },
+            {
+                value: '5',
+                name: '5. Completar Tarea(s)'
+            },
+            {
+                value: '6',
+                name: '1. Borrar Tarea'
+            },
+            {
+                value: '0',
+                name: '0. Salir'
+            },
+        ]
+    }
+];
 
-    return new Promise(resolve => {
 
-        console.clear();
+const inquirerMenu = async () => {
 
-        console.log('==========================='.cyan);
-        console.log('   Seleccione una opción   '.cyan);
-        console.log('==========================='.cyan);
+    console.clear();
 
-        console.log(`${'1.'.cyan} Crear Tarea`);
-        console.log(`${'2.'.cyan} Listar Tarea`);
-        console.log(`${'3.'.cyan} Listar Tareas Completadas`);
-        console.log(`${'4.'.cyan} Listar Tareas Pendientes`);
-        console.log(`${'5.'.cyan} Completar Tarea(s)`);
-        console.log(`${'6.'.cyan} Borrar Tarea`);
-        console.log(`${'0.'.cyan} Salir \n`);
+    console.log('===========================');
+    console.log('   Seleccione una opción   ');
+    console.log('=========================== \n');
 
-        const readline = require('readline').Interface({
-            input: process.stdin,
-            output: process.stdout,
-        });
+    const { option } = await inquirer.prompt(preguntas);
 
-        readline.question('Seleccione una opción: ', (opt) => {
-            readline.close();
-            resolve(opt);
-        });
+    return option;
 
-    })
+}
 
-};  
+const pausa = async () => {
 
+    const presioneEnter = [
+        {
+            type: 'input',
+            name: 'enter',
+            message: `Presione ${'ENTER'.green} para continuar...`
+        }
+    ]
 
-const pausa = () => {
+    console.log('\n');
 
-    return new Promise( resolve => {
+    await inquirer.prompt(presioneEnter);
 
-        const readline = require('readline').Interface({
-            input: process.stdin,
-            output: process.stdout,
-        });
-    
-        readline.question(`\nPresione ${'ENTER'.cyan} para continuar...\n`, ( opt ) => {
-            readline.close();
-            resolve();
-        });
-
-    })
-};
+}
 
 module.exports = {
-    mainMenu,
+    inquirerMenu,
     pausa
 }
