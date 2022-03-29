@@ -50,6 +50,66 @@ class Tareas{
 
     }
 
+    listarPendientesCompletadas( completadas ) {
+
+        console.log();
+        let i = 0;
+
+        this.listadoTareas.forEach( tarea => {
+            
+            const { desc, completadoEn } = tarea;
+            const estado = (completadoEn)
+                            ? 'Completado'.green
+                            : 'Pendiente'.red;
+
+            if( completadas ){
+
+                if( completadoEn ){
+                    i += 1;
+                    console.log(`${ ( i + '.').green } ${ desc } :: ${ completadoEn }`);
+                }
+
+            }else{
+
+                if( !completadoEn ){
+                    i += 1;
+                    console.log(`${ ( i + '.').green } ${ desc } :: ${ completadoEn }`);
+                }
+
+            }
+        })
+
+    }
+
+    borrarTarea( id ){
+
+        if( this._listado[id] ){
+            delete this._listado[id];
+        }
+
+    }
+
+    tareasCompletadas( ids = [] ) {
+
+        ids.forEach( id => {
+
+            const tarea = this._listado[id];
+            if ( !tarea.completadoEn ){
+                tarea.completadoEn = new Date().toISOString();            
+            }
+
+        });
+
+        this.listadoTareas.forEach( tarea => {
+
+            if( !ids.includes(tarea.id) ){
+                this._listado[tarea.id].completadoEn = null;
+            }
+
+        });
+
+    }
+
 }
 
 module.exports = Tareas;
