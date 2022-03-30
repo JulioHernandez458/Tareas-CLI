@@ -1,3 +1,8 @@
+/* 
+    Antiguo menu, que no se utiliza en la version final de la aplicacion
+    ESTE ARCHIVO NO SE UTILIZA.
+*/
+
 require('colors');
 
 

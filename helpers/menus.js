@@ -1,6 +1,13 @@
+/*
+    Archivo donde se encuentran todas las construcciones de
+    los menus utilizados en la aplicación utilizando el modulo
+    de inquirer para crearlos.
+*/
+
 const inquirer = require('inquirer');
 const colors = require('colors');
 
+// Lista de las opciones del menu que se podran seleccionar
 const preguntas = [
     {
         type: 'list',
@@ -54,6 +61,8 @@ const inquirerMenu = async () => {
 
 }
 
+
+// Se crea un input vacion como pausa en la aplicación
 const pausa = async () => {
 
     const presioneEnter = [
@@ -70,7 +79,7 @@ const pausa = async () => {
 
 }
 
-
+// Input para ingresar la descripcion de la tarea en la opción 1 
 const leerInput = async ( mensaje ) => {
 
     const question = [
@@ -93,6 +102,11 @@ const leerInput = async ( mensaje ) => {
 
 }
 
+
+/*  
+    Funcion que lista todas las tareas para borrar una. 
+    opcion 6 del menu.
+*/
 const listadoTareasBorrar = async ( tareas = [] ) => {
 
     const choices = tareas.map( ( tarea, i ) => {
@@ -123,6 +137,8 @@ const listadoTareasBorrar = async ( tareas = [] ) => {
     return id;
 }
 
+
+// Input de la confirmacion para borrar una tarea
 const confirmarBorrar = async ( mensaje ) => {
 
     const pregunta = [
@@ -138,7 +154,7 @@ const confirmarBorrar = async ( mensaje ) => {
 }
 
 
-
+// Listado tipo checkbox para seleccionar una o varias opciones a completar o anular tareas
 const listadoChecklist = async ( tareas = [] ) => {
 
     const choices = tareas.map( ( tarea, i ) => {

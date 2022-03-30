@@ -1,3 +1,7 @@
+/* 
+    Clase modelo para las tareas utilizadas
+*/
+
 const { v4: uuidv4 } = require('uuid');
 
 class Tarea {
